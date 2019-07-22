@@ -62,10 +62,10 @@ You can pip install the package!
 ### Quick start
 Let's say you have a design problem with the following table for the parameters range. Imagine this as a generic example of a checmical process in a manufacturing plant. You have 3 levels of `Pressure`, 3 levels of `Temperature`, 2 levels of `FlowRate`, and 2 levels of `Time`.
 
-Pressure: 40/55/70
-Temperature: 290/320/350
-FlowRate: 0.2/0.4
-Time: 5/8
+`Pressure`: 40/55/70<br>
+`Temperature`: 290/320/350<br>
+`FlowRate`: 0.2/0.4<br>
+`Time`: 5/8
 
 First, import `build` module from the package,
 
