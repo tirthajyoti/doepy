@@ -1,3 +1,8 @@
+# DOEPY (`pip install doepy`)
+---
+![doe-1](https://raw.githubusercontent.com/tirthajyoti/doepy/master/images/doe_1.PNG)
+#### Authored and maiantained by Dr. Tirthajyoti Sarkar, Fremont, CA 94536 (https://tirthajyoti.github.io)
+
 ## Introduction
 [Design of Experiment (DOE)](https://en.wikipedia.org/wiki/Design_of_experiments) is an important activity for any scientist, engineer, or statistician planning to conduct experimental analysis. This exercise has become **critical in this age of rapidly expanding field of data science and associated statistical modeling and machine learning**. A well-planned DOE can give a researcher meaningful data set to act upon with optimal number of experiments preserving critical resources.
 
@@ -15,6 +20,8 @@ Need for careful design of experiment arises in all fields of serious scientific
 
 ### Options for open-source DOE builder package in Python?
 Unfortunately, majority of the state-of-the-art DOE generators are part of commercial statistical software packages like [JMP (SAS)](https://www.jmp.com/) or [Minitab](www.minitab.com/en-US/default.aspx). However, a researcher will surely be benefited if there exists an open-source code which presents an intuitive user interface for generating an experimental design plan from a simple list of input variables. There are a couple of DOE builder Python packages but individually they don’t cover all the necessary DOE methods and they lack a simplified user API, where one can just input a CSV file of input variables’ range and get back the DOE matrix in another CSV file.
+
+---
 
 ## Features
 This set of codes is a collection of functions which wrap around the core packages (mentioned below) and generate **design-of-experiment (DOE) matrices** for a statistician or engineer from an arbitrary range of input variables.
@@ -42,6 +49,8 @@ In this way, ***the only API user needs to be exposed to, are input and output C
 * Maximin reconstruction,
 * Halton sequence based,
 * Uniform random matrix
+
+---
 
 ## How to use it?
 ### What supporitng packages are required?
@@ -107,6 +116,8 @@ read_write.write_csv(df_lhs,filename=filename)
 ```
 
 You should see a `lhs.csv` file in your directory.
+
+---
 
 ## Acknowledgements and Requirements
 The code was written in Python 3.7. It uses following external packages that needs to be installed on your system to use it,
