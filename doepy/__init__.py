@@ -3,3 +3,5 @@ from doepy.pydoe_corrected import fullfact_corrected,fracfact_corrected, fracfac
 from diversipy import *
 import pandas as pd
 import numpy as np
+
+name = "doepy"

@@ -44,7 +44,6 @@ def write_csv(df,filename,rounding=2):
         if '.csv' not in filename:
             filename=filename+'.csv'
         f=df_copy.to_csv(filename,index=False)
-        print("Still here")
         return f
     except:
         return -1

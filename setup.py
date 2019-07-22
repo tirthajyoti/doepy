@@ -1,5 +1,5 @@
 from io import open
-from setuptools import setup
+from setuptools import setup, Extension
 
 def read(fname, encoding='utf-8'):
     with open(fname, encoding=encoding) as f:
@@ -10,10 +10,11 @@ setup(
     version="0.0.1",
     author='Tirthajyoti Sarkar',
     author_email='tirthajyoti@gmail.com',
-    description='Design of experiments generator',
+    description='Design of experiments generator with simple CSV input/output options',
     url='https://github.com/tirthajyoti/doepy',
     download_url = 'https://github.com/tirthajyoti/doepy/archive/0.0.1.tar.gz',
     license='MIT License',
+    long_description_content_type='text/markdown',
     long_description=read('README.md'),
     packages=['doepy'],
     install_requires=['pyDOE', 'numpy','pandas','diversipy'],
