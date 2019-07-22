@@ -116,60 +116,7 @@ def build_full_fact(factor_level_ranges):
 # ================================================================================================================================================================
 # Function for building 2-level fractional factorial DataFrame from a dictionary of process variables and a generator string representing the confounded variable
 # ================================================================================================================================================================
-
-def build_frac_fact(factor_level_ranges,gen_string):
-    """
-    Builds a full factorial design dataframe from a dictionary of factor/level ranges.
-    Only min and max values of the range are required.
-	Example of the dictionary which is needed as the input:
-    {'Pressure':[50,70],'Temperature':[290, 350],'Flow rate':[0.9,1.0]}
-	
-	This function requires a little more knowledge of how the confounding will be allowed. 
-	This means that some factor effects get muddled with other interaction effects, so it’s harder to distinguish between them).
-	
-	Let’s assume that we just can’t afford (for whatever reason) the number of runs in a full-factorial design. We can systematically decide on a fraction of the full-factorial by allowing some of the factor main effects to be confounded with other factor interaction effects. 
-	This is done by defining an alias structure that defines, symbolically, these interactions. These alias structures are written like “C = AB” or “I = ABC”, or “AB = CD”, etc. 
-	These define how one column is related to the others.
-	
-	EXAMPLE
-    ------------
-    For example, the alias “C = AB” or “I = ABC” indicate that there are three factors (A, B, and C) and that the main effect of factor C is confounded with the interaction effect of the product AB, and by extension, A is confounded with BC and B is confounded with AC. 
-	A full- factorial design with these three factors results in a design matrix with 8 runs, but we will assume that we can only afford 4 of those runs. 
-	To create this fractional design, we need a matrix with three columns, one for A, B, and C, only now where the levels in the C column is created by the product of the A and B columns.
-    """
-    
-    factor_count=len(factor_level_ranges)
-    factor_lists=[]
-    
-    for key in factor_level_ranges:
-        if len(factor_level_ranges[key])!=2:
-            factor_level_ranges[key][1]=factor_level_ranges[key][-1]
-            factor_level_ranges[key]=factor_level_ranges[key][:2]
-            print(f"{key} had more than two levels. Assigning the end point to the high level.")
-    
-    #if factor_count!=len(gen_string.split(' ')):
-        #print("Length of the generator string for the fractional factorial build does not match the length of the process variables dictionary")
-        #return None
-    
-    for key in factor_level_ranges:
-        factor_lists.append(factor_level_ranges[key])
-    
-    x = fracfact_corrected(gen_string)
-    
-    def index_change(x):
-        if x==-1:
-            return 0
-        else:
-            return x
-    vfunc=np.vectorize(index_change)
-    x=vfunc(x)
-       
-    df=construct_df(x,factor_lists)
-    df.columns=factor_level_ranges.keys()
-    
-    return df
-    
-    
+     
 def build_frac_fact_res(factor_level_ranges,res=None):
     """
     Builds a 2-level fractional factorial design dataframe from a dictionary of factor/level ranges and given resolution.
