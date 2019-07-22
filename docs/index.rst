@@ -86,6 +86,8 @@ Designs available
 -  Halton sequence based,
 -  Uniform random matrix
 
+.. image:: https://raw.githubusercontent.com/tirthajyoti/doepy/master/images/factorial%20designs.jpg
+
 --------------
 
 How to use it?
