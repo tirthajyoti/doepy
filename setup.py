@@ -12,6 +12,7 @@ setup(
     author_email='tirthajyoti@gmail.com',
     description='Design of experiments generator',
     url='https://github.com/tirthajyoti/doepy',
+    download_url = 'https://github.com/tirthajyoti/doepy/archive/0.0.1.tar.gz',
     license='MIT License',
     long_description=read('README.md'),
     packages=['doepy'],
