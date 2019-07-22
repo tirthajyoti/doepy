@@ -28,70 +28,9 @@ experiments preserving critical resources.
     carefully thought-out experiment to cover all corner cases and
     reduce any possible bias.
 
-What is a scientific experiment?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-In its simplest form, a scientific experiment aims at predicting the
-outcome by introducing a change of the preconditions, which is
-represented by one or more `independent
-variables <https://en.wikipedia.org/wiki/Dependent_and_independent_variables>`__,
-also referred to as “input variables” or “predictor variables.” The
-change in one or more independent variables is generally hypothesized to
-result in a change in one or more `dependent
-variables <https://en.wikipedia.org/wiki/Dependent_and_independent_variables>`__,
-also referred to as “output variables” or “response variables.” The
-experimental design may also identify `control
-variables <https://en.wikipedia.org/wiki/Controlling_for_a_variable>`__
-that must be held constant to prevent external factors from affecting
-the results.
-
-What is Experimental Design?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Experimental design involves not only the selection of suitable
-independent, dependent, and control variables, but planning the delivery
-of the experiment under statistically optimal conditions given the
-constraints of available resources. There are multiple approaches for
-determining the set of design points (unique combinations of the
-settings of the independent variables) to be used in the experiment.
-
-Main concerns in experimental design include the establishment of
-`validity <https://en.wikipedia.org/wiki/Validity_%28statistics%29>`__,
-`reliability <https://en.wikipedia.org/wiki/Reliability_%28statistics%29>`__,
-and `replicability <https://en.wikipedia.org/wiki/Reproducibility>`__.
-For example, these concerns can be partially addressed by carefully
-choosing the independent variable, reducing the risk of measurement
-error, and ensuring that the documentation of the method is sufficiently
-detailed. Related concerns include achieving appropriate levels of
-`statistical power <https://en.wikipedia.org/wiki/Statistical_power>`__
-and
-`sensitivity <https://en.wikipedia.org/wiki/Sensitivity_and_specificity>`__.
-
-Need for careful design of experiment arises in all fields of serious
-scientific, technological, and even social science
-investigation — \ *computer science, physics, geology, political
-science, electrical engineering, psychology, business marketing
-analysis, financial analytics*, etc…
-
-Options for open-source DOE builder package in Python?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Unfortunately, majority of the state-of-the-art DOE generators are part
-of commercial statistical software packages like `JMP
-(SAS) <https://www.jmp.com/>`__ or
-`Minitab <www.minitab.com/en-US/default.aspx>`__. However, a researcher
-will surely be benefited if there exists an open-source code which
-presents an intuitive user interface for generating an experimental
-design plan from a simple list of input variables. There are a couple of
-DOE builder Python packages but individually they don’t cover all the
-necessary DOE methods and they lack a simplified user API, where one can
-just input a CSV file of input variables’ range and get back the DOE
-matrix in another CSV file.
-
---------------
 
 Features
---------
+---------
 
 This set of codes is a collection of functions which wrap around the
 core packages (mentioned below) and generate **design-of-experiment
@@ -104,7 +43,9 @@ Limitation of the foundation packages used
 Both the core packages, which act as foundations to this repo, are not
 complete in the sense that they do not cover all the necessary functions
 to generate DOE table that a design engineer may need while planning an
-experiment. Also, they offer only low-level APIs in the sense that the
+experiment. 
+
+Also, they offer only low-level APIs in the sense that the
 standard output from them are normalized numpy arrays. It was felt that
 users, who may not be comfortable in dealing with Python objects
 directly, should be able to take advantage of their functionalities
@@ -123,9 +64,9 @@ code will generate the DOE as per user's choice and write the matrix in
 a CSV file on to the disk.
 
 In this way, **the only API user needs to be exposed to, are input and
-output CSV files. These files then can be used in any engineering
+output CSV files**. These files then can be used in any engineering
 simulator, software, process-control module, or fed into process
-equipments.**
+equipments.
 
 Designs available
 ~~~~~~~~~~~~~~~~~
@@ -249,6 +190,71 @@ For writing back to a CSV,
 You should see a ``lhs.csv`` file in your directory.
 
 --------------
+
+What is DOE anyway?
+--------------------
+
+What is a scientific experiment?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In its simplest form, a scientific experiment aims at predicting the
+outcome by introducing a change of the preconditions, which is
+represented by one or more `independent
+variables <https://en.wikipedia.org/wiki/Dependent_and_independent_variables>`__,
+also referred to as “input variables” or “predictor variables.” The
+change in one or more independent variables is generally hypothesized to
+result in a change in one or more `dependent
+variables <https://en.wikipedia.org/wiki/Dependent_and_independent_variables>`__,
+also referred to as “output variables” or “response variables.” The
+experimental design may also identify `control
+variables <https://en.wikipedia.org/wiki/Controlling_for_a_variable>`__
+that must be held constant to prevent external factors from affecting
+the results.
+
+What is Experimental Design?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Experimental design involves not only the selection of suitable
+independent, dependent, and control variables, but planning the delivery
+of the experiment under statistically optimal conditions given the
+constraints of available resources. There are multiple approaches for
+determining the set of design points (unique combinations of the
+settings of the independent variables) to be used in the experiment.
+
+Main concerns in experimental design include the establishment of
+`validity <https://en.wikipedia.org/wiki/Validity_%28statistics%29>`__,
+`reliability <https://en.wikipedia.org/wiki/Reliability_%28statistics%29>`__,
+and `replicability <https://en.wikipedia.org/wiki/Reproducibility>`__.
+For example, these concerns can be partially addressed by carefully
+choosing the independent variable, reducing the risk of measurement
+error, and ensuring that the documentation of the method is sufficiently
+detailed. Related concerns include achieving appropriate levels of
+`statistical power <https://en.wikipedia.org/wiki/Statistical_power>`__
+and
+`sensitivity <https://en.wikipedia.org/wiki/Sensitivity_and_specificity>`__.
+
+Need for careful design of experiment arises in all fields of serious
+scientific, technological, and even social science
+investigation — \ *computer science, physics, geology, political
+science, electrical engineering, psychology, business marketing
+analysis, financial analytics*, etc…
+
+Options for open-source DOE builder package in Python?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Unfortunately, majority of the state-of-the-art DOE generators are part
+of commercial statistical software packages like `JMP
+(SAS) <https://www.jmp.com/>`__ or
+`Minitab <www.minitab.com/en-US/default.aspx>`__. However, a researcher
+will surely be benefited if there exists an open-source code which
+presents an intuitive user interface for generating an experimental
+design plan from a simple list of input variables. There are a couple of
+DOE builder Python packages but individually they don’t cover all the
+necessary DOE methods and they lack a simplified user API, where one can
+just input a CSV file of input variables’ range and get back the DOE
+matrix in another CSV file.
+
+------------
 
 Acknowledgements and Requirements
 ---------------------------------
