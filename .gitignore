@@ -103,6 +103,10 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+# sphinx docs
 _build
 _static
 _templates
+
+# README backups
+_readme
