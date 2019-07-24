@@ -6,7 +6,7 @@ Design of Experiment Generator in Python (``pip install doepy``)
 
 .. image:: https://raw.githubusercontent.com/tirthajyoti/doepy/master/images/doe_1.PNG
 
-Authored and maiantained by `Dr. Tirthajyoti
+Authored and maintained by `Dr. Tirthajyoti
 Sarkar <https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/>`__,
 Fremont, California.
 
