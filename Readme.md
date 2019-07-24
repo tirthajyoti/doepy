@@ -165,7 +165,7 @@ You should see a `lhs.csv` file in your directory.
 ### A simple pipeline for building a DOE table
 Clubbing together the `build` functions and the `read_write` module, one can devise a simple pipeline to build a DOE from a CSV file input.
 
-Suppose, you have a file called *ranges.csv*, which contains min/max values of an arbitrary number of parameters, in your directory. Just two lines of code will generate a space-filling Latin hypercube design based on this file with 100 randomized samples spanning over the min/max ranges.
+Suppose, you have a file called `ranges.csv`, which contains min/max values of an arbitrary number of parameters, in your directory. Just two lines of code will generate a space-filling Latin hypercube design, based on this file, with 100 randomized samples spanning over the min/max ranges and save it to a file called `DOE_table.csv`.
 
 ```
 from doepy import build, read_write
