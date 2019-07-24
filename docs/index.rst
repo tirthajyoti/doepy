@@ -4,13 +4,7 @@ Welcome to DOEPY
 Design of Experiment Generator in Python (``pip install doepy``)
 ----------------------------------------------------------------
 
-.. raw:: html
-
-   <p align="center">
-
-.. raw:: html
-
-   </p>
+.. image:: https://raw.githubusercontent.com/tirthajyoti/doepy/master/images/doe_1.PNG
 
 Authored and maiantained by `Dr. Tirthajyoti
 Sarkar <https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/>`__,
@@ -19,7 +13,7 @@ Fremont, California.
 Check `my website <https://tirthajyoti.github.io>`__ for detailes about
 my other projects and data science/ML articles.
 
-## Introduction
+Introduction
 ---------------
 
 `Design of Experiment
@@ -136,7 +130,7 @@ How to install the package?
 
 You can pip install the package!
 
-**``pip install doepy``**
+``pip install doepy``
 
 Github
 ~~~~~~
@@ -200,13 +194,7 @@ Pressure Temperature FlowRate Time
 
 There are, of course, half-factorial designs to try!
 
-.. raw:: html
-
-   <p align="center">
-
-.. raw:: html
-
-   </p>
+.. image:: https://raw.githubusercontent.com/tirthajyoti/doepy/master/images/factorial%20designs.jpg
 
 Latin Hypercube design
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -248,13 +236,7 @@ Of course, there is no guarantee that you will get the same matrix if
 you run this function because this are randomly sampled, but you get the
 idea!
 
-.. raw:: html
-
-   <p align="center">
-
-.. raw:: html
-
-   </p>
+.. image:: https://raw.githubusercontent.com/tirthajyoti/doepy/master/images/sed_3d.png
 
 Other functions to try on
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -395,14 +377,14 @@ Acknowledgements and Requirements
 The code was written in Python 3.7. It uses following external packages
 that needs to be installed on your system to use it,
 
--  **``pydoe``**: A package designed to help the scientist, engineer,
+-  ``pydoe``: A package designed to help the scientist, engineer,
    statistician, etc., to construct appropriate experimental designs.
    `Check the docs here <https://pythonhosted.org/pyDOE/>`__.
 
--  **``diversipy``**: A collection of algorithms for sampling in
+-  ``diversipy``: A collection of algorithms for sampling in
    hypercubes, selecting diverse subsets, and measuring diversity.
    `Check the docs here <https://www.simonwessing.de/diversipy/doc/>`__.
 
--  **``numpy``**
+-  ``numpy``
 
--  **``pandas``**
+-  ``pandas``
