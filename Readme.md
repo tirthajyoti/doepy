@@ -16,45 +16,6 @@ Check [my website](https://tirthajyoti.github.io) for detailes about my other pr
 
 > After all, aim of Data Science is essentially to conduct highest quality scientific investigation and modeling with real world data. And to do good science with data, one needs to collect it through carefully thought-out experiment to cover all corner cases and reduce any possible bias.
 
-## Features
-At its heart, `doepy` is just a collection of functions, which wrap around the core packages (mentioned below) and generate **design-of-experiment (DOE) matrices** for a statistician or engineer from an arbitrary range of input variables.
-
-### Limitation of the foundation packages used
-Both the core packages, which act as foundations to this repo, are not complete in the sense that they do not cover all the necessary functions to generate DOE table that a design engineer may need while planning an experiment. Also, they offer only low-level APIs in the sense that the standard output from them are normalized numpy arrays. It was felt that users, who may not be comfortable in dealing with Python objects directly, should be able to take advantage of their functionalities through a simplified user interface.
-
-### Simplified user interface
-There are other DOE generators out there. But they generate n-dimensional arrays. `doepy` is built on the simple theme of being intuitive and easy to work with - for researchers, engineers, and social scientists of all background - not just the ones who can code.
-
-**User just needs to provide a simple CSV file with a single table of variables and their ranges (2-level i.e. min/max or 3-level).** 
-
-Some of the functions work with 2-level min/max range while some others need 3-level ranges from the user (low-mid-high). Intelligence is built into the code to handle the case if the range input is not appropriate and to generate levels by simple linear interpolation from the given input.
-
-The code will generate the DOE as per user's choice and write the matrix in a CSV file on to the disk. 
-
-In this way, **the only API user needs to be exposed to, are input and output CSV files**. These files then can be used in any engineering simulator, software, process-control module, or fed into process equipments.
-
-### Pandas DataFrame support
-Under the hood, `doepy` generates Numpy arrays and convert them to Pandas DataFrame. Therefore, programatically, it is simple to get those Numpy arrays or DataFrames to do more, if the user wishes so.
-
-### Coming in a future release - support for more types of files
-Support for more input/output types will come in future releases - MS Excel, JSON, etc.
-
-### Designs available
-* Full factorial,
-* 2-level fractional factorial,
-* Plackett-Burman,
-* Sukharev grid,
-* Box-Behnken,
-* Box-Wilson (Central-composite) with center-faced option,
-* Box-Wilson (Central-composite) with center-inscribed option,
-* Box-Wilson (Central-composite) with center-circumscribed option,
-* Latin hypercube (simple),
-* Latin hypercube (space-filling),
-* Random k-means cluster,
-* Maximin reconstruction,
-* Halton sequence based,
-* Uniform random matrix
-
 ## How to use it?
 ### What supporitng packages are required?
 First make sure you have all the necessary packages installed. You can simply run the .bash (Unix/Linux) and .bat (Windows) files provided in the repo, to install those packages from your command line interface. They contain the following commands,
@@ -199,6 +160,45 @@ num_samples=100),
 filename='DOE_table.csv'
 )
 ```
+
+## Features
+At its heart, `doepy` is just a collection of functions, which wrap around the core packages (mentioned below) and generate **design-of-experiment (DOE) matrices** for a statistician or engineer from an arbitrary range of input variables.
+
+### Limitation of the foundation packages used
+Both the core packages, which act as foundations to this repo, are not complete in the sense that they do not cover all the necessary functions to generate DOE table that a design engineer may need while planning an experiment. Also, they offer only low-level APIs in the sense that the standard output from them are normalized numpy arrays. It was felt that users, who may not be comfortable in dealing with Python objects directly, should be able to take advantage of their functionalities through a simplified user interface.
+
+### Simplified user interface
+There are other DOE generators out there. But they generate n-dimensional arrays. `doepy` is built on the simple theme of being intuitive and easy to work with - for researchers, engineers, and social scientists of all background - not just the ones who can code.
+
+**User just needs to provide a simple CSV file with a single table of variables and their ranges (2-level i.e. min/max or 3-level).** 
+
+Some of the functions work with 2-level min/max range while some others need 3-level ranges from the user (low-mid-high). Intelligence is built into the code to handle the case if the range input is not appropriate and to generate levels by simple linear interpolation from the given input.
+
+The code will generate the DOE as per user's choice and write the matrix in a CSV file on to the disk. 
+
+In this way, **the only API user needs to be exposed to, are input and output CSV files**. These files then can be used in any engineering simulator, software, process-control module, or fed into process equipments.
+
+### Pandas DataFrame support
+Under the hood, `doepy` generates Numpy arrays and convert them to Pandas DataFrame. Therefore, programatically, it is simple to get those Numpy arrays or DataFrames to do more, if the user wishes so.
+
+### Coming in a future release - support for more types of files
+Support for more input/output types will come in future releases - MS Excel, JSON, etc.
+
+### Designs available
+* Full factorial,
+* 2-level fractional factorial,
+* Plackett-Burman,
+* Sukharev grid,
+* Box-Behnken,
+* Box-Wilson (Central-composite) with center-faced option,
+* Box-Wilson (Central-composite) with center-inscribed option,
+* Box-Wilson (Central-composite) with center-circumscribed option,
+* Latin hypercube (simple),
+* Latin hypercube (space-filling),
+* Random k-means cluster,
+* Maximin reconstruction,
+* Halton sequence based,
+* Uniform random matrix
 
 ## About Design of Experiment
 
