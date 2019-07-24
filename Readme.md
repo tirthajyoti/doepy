@@ -87,9 +87,7 @@ First, import `build` module from the package,
 
 ```from doepy import build```
 
-Then, try a simple example by building a **full factorial design**.
-<br> We will use `build.full_fact()` function for this.
-<br>You have to pass a dictionary object to the function which encodes your experimental data.
+Then, try a simple example by building a **full factorial design**. We will use `build.full_fact()` function for this. You have to pass a dictionary object to the function which encodes your experimental data.
 
 ```
 build.full_fact(
