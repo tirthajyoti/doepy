@@ -28,9 +28,16 @@ pip install diversipy
 ```
 
 ### How to install the package?
-You can pip install the package!
+(On Linux and Windows) You can use ``pip`` to install ``doepy``::
 
-**```pip install doepy```**
+	pip install doepy
+
+(On Mac OS), first install pip,
+```
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python get-pip.py
+```
+Then proceed as above.
 
 ### Github
 The package is hosted at this **[Github repo](https://github.com/tirthajyoti/doepy)**.
@@ -88,6 +95,15 @@ Sometimes, a set of **randomized design points within a given range** could be a
 However, a Latin Hypercube design is better choice for experimental design rather than building a complete random matrix as it tries to subdivide the sample space in smaller cells and choose only one element out of each subcell. This way, a more **uniform spreading' of the random sample points** can be obtained. 
 
 User can choose the density of sample points. For example, if we choose to generate a Latin Hypercube of 12 experiments from the same input files, that could look like,
+```
+build.space_filling_lhs(
+{'Pressure':[40,55,70],
+'Temperature':[290, 320, 350],
+'Flow rate':[0.2,0.4], 
+'Time':[5,11]},
+num_samples = 12
+)
+```
 
 Pressure | Temperature | FlowRate | Time
 ------------ | ------------- | -------------|-----------------
