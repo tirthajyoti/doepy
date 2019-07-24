@@ -1,17 +1,26 @@
-==============================
-DOEPY (``pip install doepy``)
-==============================
-----------------------------------------------------------------------
-A Python package for easily generating design of experiment tables
-----------------------------------------------------------------------
-.. image:: https://raw.githubusercontent.com/tirthajyoti/doepy/master/images/doe_1.PNG
+Welcome to DOEPY
+================
 
-Authored and maiantained by `Dr. Tirthajyoti Sarkar <https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/>`_, Fremont, California.
+Design of Experiment Generator in Python (``pip install doepy``)
+----------------------------------------------------------------
 
-Check my website: https://tirthajyoti.github.io
+.. raw:: html
 
-Introduction
-------------
+   <p align="center">
+
+.. raw:: html
+
+   </p>
+
+Authored and maiantained by `Dr. Tirthajyoti
+Sarkar <https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/>`__,
+Fremont, California.
+
+Check `my website <https://tirthajyoti.github.io>`__ for detailes about
+my other projects and data science/ML articles.
+
+## Introduction
+---------------
 
 `Design of Experiment
 (DOE) <https://en.wikipedia.org/wiki/Design_of_experiments>`__ is an
@@ -22,20 +31,19 @@ statistical modeling and machine learning**. A well-planned DOE can give
 a researcher meaningful data set to act upon with optimal number of
 experiments preserving critical resources.
 
-    After all, aim of Data Science is essentially to conduct highest
-    quality scientific investigation and modeling with real world data.
-    And to do good science with data, one needs to collect it through
-    carefully thought-out experiment to cover all corner cases and
-    reduce any possible bias.
-
+   After all, aim of Data Science is essentially to conduct highest
+   quality scientific investigation and modeling with real world data.
+   And to do good science with data, one needs to collect it through
+   carefully thought-out experiment to cover all corner cases and reduce
+   any possible bias.
 
 Features
----------
+--------
 
-This set of codes is a collection of functions which wrap around the
-core packages (mentioned below) and generate **design-of-experiment
-(DOE) matrices** for a statistician or engineer from an arbitrary range
-of input variables.
+At its heart, ``doepy`` is just a collection of functions, which wrap
+around the core packages (mentioned below) and generate
+**design-of-experiment (DOE) matrices** for a statistician or engineer
+from an arbitrary range of input variables.
 
 Limitation of the foundation packages used
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -43,9 +51,7 @@ Limitation of the foundation packages used
 Both the core packages, which act as foundations to this repo, are not
 complete in the sense that they do not cover all the necessary functions
 to generate DOE table that a design engineer may need while planning an
-experiment. 
-
-Also, they offer only low-level APIs in the sense that the
+experiment. Also, they offer only low-level APIs in the sense that the
 standard output from them are normalized numpy arrays. It was felt that
 users, who may not be comfortable in dealing with Python objects
 directly, should be able to take advantage of their functionalities
@@ -54,19 +60,40 @@ through a simplified user interface.
 Simplified user interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
+There are other DOE generators out there. But they generate
+n-dimensional arrays. ``doepy`` is built on the simple theme of being
+intuitive and easy to work with - for researchers, engineers, and social
+scientists of all background - not just the ones who can code.
+
 **User just needs to provide a simple CSV file with a single table of
-variables and their ranges (2-level i.e. min/max or 3-level).** Some of
-the functions work with 2-level min/max range while some others need
-3-level ranges from the user (low-mid-high). Intelligence is built into
-the code to handle the case if the range input is not appropriate and to
-generate levels by simple linear interpolation from the given input. The
-code will generate the DOE as per user's choice and write the matrix in
-a CSV file on to the disk.
+variables and their ranges (2-level i.e. min/max or 3-level).**
+
+Some of the functions work with 2-level min/max range while some others
+need 3-level ranges from the user (low-mid-high). Intelligence is built
+into the code to handle the case if the range input is not appropriate
+and to generate levels by simple linear interpolation from the given
+input.
+
+The code will generate the DOE as per user’s choice and write the matrix
+in a CSV file on to the disk.
 
 In this way, **the only API user needs to be exposed to, are input and
 output CSV files**. These files then can be used in any engineering
 simulator, software, process-control module, or fed into process
 equipments.
+
+Pandas DataFrame support
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Under the hood, ``doepy`` generates Numpy arrays and convert them to
+Pandas DataFrame. Therefore, programatically, it is simple to get those
+Numpy arrays or DataFrames to do more, if the user wishes so.
+
+Coming in a future release - support for more types of files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Support for more input/output types will come in future releases - MS
+Excel, JSON, etc.
 
 Designs available
 ~~~~~~~~~~~~~~~~~
@@ -86,10 +113,6 @@ Designs available
 -  Halton sequence based,
 -  Uniform random matrix
 
-.. image:: https://raw.githubusercontent.com/tirthajyoti/doepy/master/images/factorial%20designs.jpg
-
---------------
-
 How to use it?
 --------------
 
@@ -103,62 +126,152 @@ They contain the following commands,
 
 ::
 
-    pip install numpy
-    pip install pandas
-    pip install pydoe
-    pip install diversipy
+   pip install numpy
+   pip install pandas
+   pip install pydoe
+   pip install diversipy
 
 How to install the package?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can pip install the package!
 
-``pip install doepy``
+**``pip install doepy``**
+
+Github
+~~~~~~
+
+The package is hosted at this `Github
+repo <https://github.com/tirthajyoti/doepy>`__.
 
 Quick start
 ~~~~~~~~~~~
 
-Let's say you have a design problem with the following table for the
+Let’s say you have a design problem with the following table for the
 parameters range. Imagine this as a generic example of a checmical
 process in a manufacturing plant. You have 3 levels of ``Pressure``, 3
 levels of ``Temperature``, 2 levels of ``FlowRate``, and 2 levels of
 ``Time``.
 
-| ``Pressure``: 40/55/70
-| ``Temperature``: 290/320/350
-| ``FlowRate``: 0.2/0.4
-| ``Time``: 5/8
+======== =========== ======== ====
+Pressure Temperature FlowRate Time
+======== =========== ======== ====
+40       290         0.2      5
+50       320         0.3      8
+70       350         -        -
+======== =========== ======== ====
 
 First, import ``build`` module from the package,
 
 ``from doepy import build``
 
-| Then, try a simple example by building a **full factorial design**. We will use ``build.full_fact()`` function for this. You have to pass a dictionary object to the function which encodes your experimental data.
+Then, try a simple example by building a **full factorial design**. We
+will use ``build.full_fact()`` function for this. You have to pass a
+dictionary object to the function which encodes your experimental data.
 
 ::
 
-    build.full_fact({'Pressure':[40,55,70],'Temperature':[290, 320, 350],
-    'Flow rate':[0.2,0.4], 'Time':[5,8]})
+   build.full_fact(
+   {'Pressure':[40,55,70],
+   'Temperature':[290, 320, 350],
+   'Flow rate':[0.2,0.4], 
+   'Time':[5,8]}
+   )
 
-If you build a full-factorial DOE out of this, you should get a table with 3 x 3 x 2 x 2 = 36 entries.
+If you build a full-factorial DOE out of this, you should get a table
+with 3x3x2x2 = 36 entries.
+
+======== =========== ======== ====
+Pressure Temperature FlowRate Time
+======== =========== ======== ====
+40       290         0.2      5
+50       290         0.2      5
+70       290         0.2      5
+40       320         0.2      5
+…        …           …        …
+…        …           …        …
+40       290         0.3      8
+50       290         0.3      8
+70       290         0.3      8
+40       320         0.3      8
+…        …           …        …
+…        …           …        …
+======== =========== ======== ====
+
+There are, of course, half-factorial designs to try!
+
+.. raw:: html
+
+   <p align="center">
+
+.. raw:: html
+
+   </p>
+
+Latin Hypercube design
+~~~~~~~~~~~~~~~~~~~~~~
+
+Sometimes, a set of **randomized design points within a given range**
+could be attractive for the experimenter to asses the impact of the
+process variables on the output. `Monte Carlo
+simulations <https://en.wikipedia.org/wiki/Monte_Carlo_method>`__ are
+close example of this approach.
+
+However, a Latin Hypercube design is better choice for experimental
+design rather than building a complete random matrix as it tries to
+subdivide the sample space in smaller cells and choose only one element
+out of each subcell. This way, a more **uniform spreading’ of the random
+sample points** can be obtained.
+
+User can choose the density of sample points. For example, if we choose
+to generate a Latin Hypercube of 12 experiments from the same input
+files, that could look like,
+
+======== =========== ======== =====
+Pressure Temperature FlowRate Time
+======== =========== ======== =====
+63.16    313.32      0.37     10.52
+61.16    343.88      0.23     5.04
+57.83    327.46      0.35     9.47
+68.61    309.81      0.35     8.39
+66.01    301.29      0.22     6.34
+45.76    347.97      0.27     6.94
+40.48    320.72      0.29     9.68
+51.46    293.35      0.20     7.11
+43.63    334.92      0.30     7.66
+47.87    339.68      0.26     8.59
+55.28    317.68      0.39     5.61
+53.99    297.07      0.32     10.43
+======== =========== ======== =====
+
+Of course, there is no guarantee that you will get the same matrix if
+you run this function because this are randomly sampled, but you get the
+idea!
+
+.. raw:: html
+
+   <p align="center">
+
+.. raw:: html
+
+   </p>
 
 Other functions to try on
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Try other functions like ``build.space_filling_lhs()`` to construct a
-`space-filling Latin hypercube
-design <https://en.wikipedia.org/wiki/Latin_hypercube_sampling>`__.
-
-Or try from one of the following available design options...
+Try any one of the following designs,
 
 -  Full factorial: ``build.full_fact()``
 -  2-level fractional factorial: ``build.frac_fact_res()``
 -  Plackett-Burman: ``build.plackett_burman()``
 -  Sukharev grid: ``build.sukharev()``
 -  Box-Behnken: ``build.box_behnken()``
--  Box-Wilson (Central-composite) with center-faced option: ``build.central_composite()`` with ``face='ccf'`` option
--  Box-Wilson (Central-composite) with center-inscribed option: ``build.central_composite()`` with ``face='cci'`` option
--  Box-Wilson (Central-composite) with center-circumscribed option: ``build.central_composite()`` with ``face='ccc'`` option
+-  Box-Wilson (Central-composite) with center-faced option:
+   ``build.central_composite()`` with ``face='ccf'`` option
+-  Box-Wilson (Central-composite) with center-inscribed option:
+   ``build.central_composite()`` with ``face='cci'`` option
+-  Box-Wilson (Central-composite) with center-circumscribed option:
+   ``build.central_composite()`` with ``face='ccc'`` option
 -  Latin hypercube (simple): ``build.lhs()``
 -  Latin hypercube (space-filling): ``build.space_filling_lhs()``
 -  Random k-means cluster: ``build.random_k_means()``
@@ -175,8 +288,8 @@ use the ``read_write`` module of the package.
 
 ::
 
-    from doepy import read_write
-    data_in=read_write.read_variables_csv('../Data/params.csv')
+   from doepy import read_write
+   data_in=read_write.read_variables_csv('../Data/params.csv')
 
 Then you can use this ``data_in`` object in the DOE generating
 functions.
@@ -185,16 +298,36 @@ For writing back to a CSV,
 
 ::
 
-    df_lhs=build.space_filling_lhs(data_in,num_samples=100)
-    filename = 'lhs'
-    read_write.write_csv(df_lhs,filename=filename)
+   df_lhs=build.space_filling_lhs(data_in,num_samples=100)
+   filename = 'lhs'
+   read_write.write_csv(df_lhs,filename=filename)
 
 You should see a ``lhs.csv`` file in your directory.
 
---------------
+A simple pipeline for building a DOE table
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-What is DOE anyway?
---------------------
+Clubbing together the ``build`` functions and the ``read_write`` module,
+one can devise a simple pipeline to build a DOE from a CSV file input.
+
+Suppose, you have a file called *ranges.csv*, which contains min/max
+values of an arbitrary number of parameters, in your directory. Just two
+lines of code will generate a space-filling Latin hypercube design based
+on this file with 100 randomized samples spanning over the min/max
+ranges.
+
+::
+
+   from doepy import build, read_write
+
+   read_write.write_csv(
+   build.space_filling_lhs(read_write.read_variables_csv('ranges.csv'),
+   num_samples=100),
+   filename='DOE_table.csv'
+   )
+
+About Design of Experiment
+--------------------------
 
 What is a scientific experiment?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -256,19 +389,20 @@ necessary DOE methods and they lack a simplified user API, where one can
 just input a CSV file of input variables’ range and get back the DOE
 matrix in another CSV file.
 
-------------
-
 Acknowledgements and Requirements
 ---------------------------------
 
 The code was written in Python 3.7. It uses following external packages
 that needs to be installed on your system to use it,
 
--  ``pydoe``: A package designed to help the scientist, engineer,
+-  **``pydoe``**: A package designed to help the scientist, engineer,
    statistician, etc., to construct appropriate experimental designs.
    `Check the docs here <https://pythonhosted.org/pyDOE/>`__.
--  ``diversipy``: A collection of algorithms for sampling in hypercubes,
-   selecting diverse subsets, and measuring diversity. `Check the docs
-   here <https://www.simonwessing.de/diversipy/doc/>`__.
--  ``numpy``
--  ``pandas``
+
+-  **``diversipy``**: A collection of algorithms for sampling in
+   hypercubes, selecting diverse subsets, and measuring diversity.
+   `Check the docs here <https://www.simonwessing.de/diversipy/doc/>`__.
+
+-  **``numpy``**
+
+-  **``pandas``**
