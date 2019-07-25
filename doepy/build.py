@@ -1,9 +1,18 @@
-from doepy.doe_functions import build_full_fact, build_frac_fact_res,\
-                                build_plackett_burman,build_sukharev,\
-                                build_box_behnken, build_central_composite, \
-                                build_lhs, build_space_filling_lhs, \
-                                build_random_k_means, build_maximin, \
-                                build_halton, build_uniform_random
+from doepy.doe_functions import (
+    build_full_fact,
+    build_frac_fact_res,
+    build_plackett_burman,
+    build_sukharev,
+    build_box_behnken,
+    build_central_composite,
+    build_lhs,
+    build_space_filling_lhs,
+    build_random_k_means,
+    build_maximin,
+    build_halton,
+    build_uniform_random,
+)
+
 
 def full_fact(d):
     """
@@ -12,8 +21,9 @@ def full_fact(d):
     {'Pressure':[50,60,70],'Temperature':[290, 320, 350],'Flow rate':[0.9,1.0]}
     """
     return build_full_fact(d)
-    
-def frac_fact_res(d,res=None):
+
+
+def frac_fact_res(d, res=None):
     """
     Builds a 2-level fractional factorial design dataframe from a dictionary of factor/level ranges and given resolution.
       
@@ -69,9 +79,10 @@ def frac_fact_res(d,res=None):
         ...
         ValueError: design not possible
     """
-    
-    return build_frac_fact_res(d,res=res)
-    
+
+    return build_frac_fact_res(d, res=res)
+
+
 def plackett_burman(d):
     """
     Builds a Plackett-Burman dataframe from a dictionary of factor/level ranges.
@@ -87,10 +98,11 @@ def plackett_burman(d):
 	These designs are unique in that the number of trial conditions (rows) expands by multiples of four (e.g. 4, 8, 12, etc.). 
 	The max number of columns allowed before a design increases the number of rows is always one less than the next higher multiple of four.
     """
-    
+
     return build_plackett_burman(d)
 
-def sukharev(d,num_samples=None):
+
+def sukharev(d, num_samples=None):
     """
     Builds a Sukharev-grid hypercube design dataframe from a dictionary of factor/level ranges.
     Number of samples raised to the power of (1/dimension), where dimension is the number of variables, must be an integer.
@@ -102,10 +114,11 @@ def sukharev(d,num_samples=None):
 	Special property of this grid is that points are not placed on the boundaries of the hypercube, but at centroids of the  subcells constituted by individual samples. 
 	This design offers optimal results for the covering radius regarding distances based on the max-norm.
     """
-    
-    return build_sukharev(d,num_samples=num_samples)
 
-def box_behnken(d,center=1):
+    return build_sukharev(d, num_samples=num_samples)
+
+
+def box_behnken(d, center=1):
     """
     Builds a Box-Behnken design dataframe from a dictionary of factor/level ranges.
     Note 3 levels of factors are necessary. If not given, the function will automatically create 3 levels by linear mid-section method.
@@ -117,10 +130,11 @@ def box_behnken(d,center=1):
 		* The design should be sufficient to fit a quadratic model, that is, one containing squared terms, products of two factors, linear terms and an intercept.
 		* The ratio of the number of experimental points to the number of coefficients in the quadratic model should be reasonable (in fact, their designs kept it in the range of 1.5 to 2.6).*estimation variance should more or less depend only on the distance from the centre (this is achieved exactly for the designs with 4 and 7 factors), and should not vary too much inside the smallest (hyper)cube containing the experimental points.
 	"""
-    
-    return build_box_behnken(d,center=center)
 
-def central_composite(d,center=(2,2),alpha='o',face='ccc'):
+    return build_box_behnken(d, center=center)
+
+
+def central_composite(d, center=(2, 2), alpha="o", face="ccc"):
     """
     Builds a central-composite design dataframe from a dictionary of factor/level ranges.
     Only min and max values of the range are required.
@@ -133,8 +147,9 @@ def central_composite(d,center=(2,2),alpha='o',face='ccc'):
 		* A set of center points, experimental runs whose values of each factor are the medians of the values used in the factorial portion. This point is often replicated in order to improve the precision of the experiment;
 		* A set of axial points, experimental runs identical to the centre points except for one factor, which will take on values both below and above the median of the two factorial levels, and typically both outside their range. All factors are varied in this way.
     """
-    
-    return build_central_composite(d,center=center,alpha=alpha,face=face)
+
+    return build_central_composite(d, center=center, alpha=alpha, face=face)
+
 
 def lhs(d, num_samples=None, prob_distribution=None):
     """
@@ -149,9 +164,10 @@ def lhs(d, num_samples=None, prob_distribution=None):
 
 	Latin hypercube sampling (LHS) is a form of stratified sampling that can be applied to multiple variables. The method commonly used to reduce the number or runs necessary for a Monte Carlo simulation to achieve a reasonably accurate random distribution. LHS can be incorporated into an existing Monte Carlo model fairly easily, and work with variables following any analytical probability distribution.
     """
-    
+
     return build_lhs(d, num_samples=num_samples, prob_distribution=prob_distribution)
-    
+
+
 def space_filling_lhs(d, num_samples=None):
     """
     Builds a space-filling Latin Hypercube design dataframe from a dictionary of factor/level ranges.
@@ -160,8 +176,9 @@ def space_filling_lhs(d, num_samples=None):
     {'Pressure':[50,70],'Temperature':[290, 350],'Flow rate':[0.9,1.0]}
     num_samples: Number of samples to be generated
     """
-    
+
     return build_space_filling_lhs(d, num_samples=num_samples)
+
 
 def random_k_means(d, num_samples=None):
     """
@@ -171,9 +188,10 @@ def random_k_means(d, num_samples=None):
     {'Pressure':[50,70],'Temperature':[290, 350],'Flow rate':[0.9,1.0]}
     num_samples: Number of samples to be generated
     """
-    
+
     return build_random_k_means(d, num_samples=num_samples)
-    
+
+
 def maximin(d, num_samples=None):
     """
     Builds a maximin reconstructed design dataframe from a dictionary of factor/level ranges.
@@ -187,9 +205,10 @@ def maximin(d, num_samples=None):
 		* existing (fixed) points, 
 		* the boundary of the hypercube.
     """
-    
+
     return build_maximin(d, num_samples=num_samples)
-    
+
+
 def halton(d, num_samples=None):
     """
     Builds a quasirandom dataframe from a dictionary of factor/level ranges using prime numbers as seed.
@@ -200,10 +219,11 @@ def halton(d, num_samples=None):
 
     Quasirandom sequence using the default initialization with first n prime numbers equal to the number of factors/variables.
     """
-    
+
     return build_halton(d, num_samples=num_samples)
-    
-def uniform_random (d, num_samples=None):
+
+
+def uniform_random(d, num_samples=None):
     """
     Builds a design dataframe with samples drawn from uniform random distribution based on a dictionary of factor/level ranges.
     Only min and max values of the range are required.
@@ -211,5 +231,5 @@ def uniform_random (d, num_samples=None):
     {'Pressure':[50,70],'Temperature':[290, 350],'Flow rate':[0.9,1.0]}
     num_samples: Number of samples to be generated
     """
-    
-    return build_uniform_random (d, num_samples=num_samples)
+
+    return build_uniform_random(d, num_samples=num_samples)

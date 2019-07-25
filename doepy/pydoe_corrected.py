@@ -5,7 +5,8 @@ import string
 from scipy.special import binom
 
 
-#__all__ = ['np', 'fullfact_corrected', 'ff2n_corrected', 'fracfact']
+# __all__ = ['np', 'fullfact_corrected', 'ff2n_corrected', 'fracfact']
+
 
 def fullfact_corrected(levels):
     """
@@ -56,21 +57,23 @@ def fullfact_corrected(levels):
     n = len(levels)  # number of factors
     nb_lines = np.prod(levels)  # number of trial conditions
     H = np.zeros((nb_lines, n))
-    
+
     level_repeat = 1
     range_repeat = np.prod(levels)
     for i in range(n):
         range_repeat //= levels[i]
         lvl = []
         for j in range(levels[i]):
-            lvl += [j]*level_repeat
-        rng = lvl*range_repeat
+            lvl += [j] * level_repeat
+        rng = lvl * range_repeat
         level_repeat *= levels[i]
         H[:, i] = rng
-     
+
     return H
-    
+
+
 ################################################################################
+
 
 def ff2n_corrected(n):
     """
@@ -101,12 +104,15 @@ def ff2n_corrected(n):
                [ 1.,  1.,  1.]])
        
     """
-    return 2*fullfact_corrected([2]*n) - 1
+    return 2 * fullfact_corrected([2] * n) - 1
+
 
 def ff2n(levels):
-    return 2*fullfact_corrected([2]*levels)-1
+    return 2 * fullfact_corrected([2] * levels) - 1
+
 
 ################################################################################
+
 
 def fracfact_corrected(gen):
     """
@@ -181,22 +187,22 @@ def fracfact_corrected(gen):
        
     """
     # Recognize letters and combinations
-    A = [item for item in re.split('\-|\s|\+', gen) if item]  # remove empty strings
+    A = [item for item in re.split("\-|\s|\+", gen) if item]  # remove empty strings
     C = [len(item) for item in A]
 
     # Indices of single letters (main factors)
-    I = [i for i, item in enumerate(C) if item==1]
+    I = [i for i, item in enumerate(C) if item == 1]
 
     # Indices of letter combinations (we need them to fill out H2 properly).
-    J = [i for i, item in enumerate(C) if item!=1]
+    J = [i for i, item in enumerate(C) if item != 1]
 
     # Check if there are "-" or "+" operators in gen
-    U = [item for item in gen.split(' ') if item]  # remove empty strings
+    U = [item for item in gen.split(" ") if item]  # remove empty strings
 
     # If R1 is either None or not, the result is not changed, since it is a
     # multiplication of 1.
-    R1 = _grep(U, '+')
-    R2 = _grep(U, '-')
+    R1 = _grep(U, "+")
+    R2 = _grep(U, "-")
 
     # Fill in design with two level factorial design
     H1 = ff2n(len(I))
@@ -210,7 +216,7 @@ def fracfact_corrected(gen):
         xx = np.array([ord(c) for c in A[k]]) - 97
 
         # For uppercase letters
-        if np.any(xx<0):
+        if np.any(xx < 0):
             xx = np.array([ord(c) for c in A[k]]) - 65
 
         H[:, k] = np.prod(H1[:, xx], axis=1)
@@ -221,7 +227,8 @@ def fracfact_corrected(gen):
 
     # Return the fractional factorial design
     return H
-    
+
+
 def _grep(haystack, needle):
     try:
         haystack[0]
@@ -234,6 +241,7 @@ def _grep(haystack, needle):
                 locs += [idx]
         return locs
 
+
 def _n_fac_at_res(n, res):
     """ Calculate number of possible factors for fractional factorial
     design with `n` base factors at resolution `res`.
@@ -241,7 +249,7 @@ def _n_fac_at_res(n, res):
     return sum(binom(n, r) for r in range(res - 1, n)) + n
 
 
-#__all__ = ['bbdesign_corrected']
+# __all__ = ['bbdesign_corrected']
 
 
 def fracfact_by_res(n, res):
@@ -301,29 +309,34 @@ def fracfact_by_res(n, res):
         ValueError: design not possible
     """
     # Determine minimum required number of base-factors.
-    min_fac = next(dropwhile(lambda n_: _n_fac_at_res(n_, res) < n,
-                             range(res - 1, n)), None)
+    min_fac = next(
+        dropwhile(lambda n_: _n_fac_at_res(n_, res) < n, range(res - 1, n)), None
+    )
 
     if min_fac is None:
-        raise ValueError('design not possible')
+        raise ValueError("design not possible")
     elif min_fac > len(string.ascii_lowercase):
         # This check needs to be done to make sure that the number
         # of available are enough since `fracfact` parses design generator
         # characters. In practice, this is highly theoretical and it is
         # much more likely to run into memory-issues.
-        raise ValueError('design requires too many base-factors.')
+        raise ValueError("design requires too many base-factors.")
 
     # Get base factors.
     factors = list(string.ascii_lowercase[:min_fac])
 
     # Fill out with factor combinations until `n` factors.
-    factor_combs = (''.join(c) for r in range(res - 1, len(factors))
-                    for c in combinations(factors, r))
+    factor_combs = (
+        "".join(c)
+        for r in range(res - 1, len(factors))
+        for c in combinations(factors, r)
+    )
     extra_factors = list(islice(factor_combs, n - len(factors)))
 
     # Concatenate `gen` string for `fracfact`.
-    gen = ' '.join(factors + extra_factors)
+    gen = " ".join(factors + extra_factors)
     return fracfact_corrected(gen)
+
 
 def bbdesign_corrected(n, center=None):
     """
@@ -366,46 +379,52 @@ def bbdesign_corrected(n, center=None):
                [ 0.,  0.,  0.]])
         
     """
-    assert n>=3, 'Number of variables must be at least 3'
-    
+    assert n >= 3, "Number of variables must be at least 3"
+
     # First, compute a factorial DOE with 2 parameters
     H_fact = ff2n_corrected(2)
     # Now we populate the real DOE with this DOE
-    
+
     # We made a factorial design on each pair of dimensions
     # - So, we created a factorial design with two factors
     # - Make two loops
     Index = 0
-    nb_lines = int((0.5*n*(n-1))*H_fact.shape[0])
+    nb_lines = int((0.5 * n * (n - 1)) * H_fact.shape[0])
     H = repeat_center(n, nb_lines)
-    
+
     for i in range(n - 1):
         for j in range(i + 1, n):
             Index = Index + 1
-            H[max([0, (Index - 1)*H_fact.shape[0]]):Index*H_fact.shape[0], i] = H_fact[:, 0]
-            H[max([0, (Index - 1)*H_fact.shape[0]]):Index*H_fact.shape[0], j] = H_fact[:, 1]
+            H[
+                max([0, (Index - 1) * H_fact.shape[0]]) : Index * H_fact.shape[0], i
+            ] = H_fact[:, 0]
+            H[
+                max([0, (Index - 1) * H_fact.shape[0]]) : Index * H_fact.shape[0], j
+            ] = H_fact[:, 1]
 
     if center is None:
-        if n<=16:
-            points= [0, 0, 0, 3, 3, 6, 6, 6, 8, 9, 10, 12, 12, 13, 14, 15, 16]
+        if n <= 16:
+            points = [0, 0, 0, 3, 3, 6, 6, 6, 8, 9, 10, 12, 12, 13, 14, 15, 16]
             center = points[n]
         else:
             center = n
-        
+
     H = np.c_[H.T, repeat_center(n, center).T].T
-    
+
     return H
 
 
 import numpy as np
-#from pyDOE.doe_factorial import ff2n
+
+# from pyDOE.doe_factorial import ff2n
 from pyDOE.doe_star import star
 from pyDOE.doe_union import union
 from pyDOE.doe_repeat_center import repeat_center
 
-__all__ = ['ccdesign']
+__all__ = ["ccdesign"]
 
-def ccdesign_corrected(n, center=(4, 4), alpha='orthogonal', face='circumscribed'):
+
+def ccdesign_corrected(n, center=(4, 4), alpha="orthogonal", face="circumscribed"):
     """
     Central composite design
     
@@ -497,43 +516,59 @@ def ccdesign_corrected(n, center=(4, 4), alpha='orthogonal', face='circumscribed
        
     """
     # Check inputs
-    assert isinstance(n, int) and n>1, '"n" must be an integer greater than 1.'
-    assert alpha.lower() in ('orthogonal', 'o', 'rotatable', 
-        'r'), 'Invalid value for "alpha": {:}'.format(alpha)
-    assert face.lower() in ('circumscribed', 'ccc', 'inscribed', 'cci',
-        'faced', 'ccf'), 'Invalid value for "face": {:}'.format(face)
-    
+    assert isinstance(n, int) and n > 1, '"n" must be an integer greater than 1.'
+    assert alpha.lower() in (
+        "orthogonal",
+        "o",
+        "rotatable",
+        "r",
+    ), 'Invalid value for "alpha": {:}'.format(alpha)
+    assert face.lower() in (
+        "circumscribed",
+        "ccc",
+        "inscribed",
+        "cci",
+        "faced",
+        "ccf",
+    ), 'Invalid value for "face": {:}'.format(face)
+
     try:
         nc = len(center)
     except:
-        raise TypeError('Invalid value for "center": {:}. Expected a 1-by-2 array.'.format(center))
+        raise TypeError(
+            'Invalid value for "center": {:}. Expected a 1-by-2 array.'.format(center)
+        )
     else:
-        if nc!=2:
-            raise ValueError('Invalid number of values for "center" (expected 2, but got {:})'.format(nc))
+        if nc != 2:
+            raise ValueError(
+                'Invalid number of values for "center" (expected 2, but got {:})'.format(
+                    nc
+                )
+            )
 
     # Orthogonal Design
-    if alpha.lower() in ('orthogonal', 'o'):
-        H2, a = star(n, alpha='orthogonal', center=center)
-    
+    if alpha.lower() in ("orthogonal", "o"):
+        H2, a = star(n, alpha="orthogonal", center=center)
+
     # Rotatable Design
-    if alpha.lower() in ('rotatable', 'r'):
-        H2, a = star(n, alpha='rotatable')
-    
+    if alpha.lower() in ("rotatable", "r"):
+        H2, a = star(n, alpha="rotatable")
+
     # Inscribed CCD
-    if face.lower() in ('inscribed', 'cci'):
+    if face.lower() in ("inscribed", "cci"):
         H1 = ff2n_corrected(n)
-        H1 = H1/a  # Scale down the factorial points
+        H1 = H1 / a  # Scale down the factorial points
         H2, a = star(n)
-    
+
     # Faced CCD
-    if face.lower() in ('faced', 'ccf'):
+    if face.lower() in ("faced", "ccf"):
         H2, a = star(n)  # Value of alpha is always 1 in Faced CCD
         H1 = ff2n_corrected(n)
-    
+
     # Circumscribed CCD
-    if face.lower() in ('circumscribed', 'ccc'):
+    if face.lower() in ("circumscribed", "ccc"):
         H1 = ff2n_corrected(n)
-    
+
     C1 = repeat_center(n, center[0])
     C2 = repeat_center(n, center[1])
 
@@ -570,5 +605,3 @@ def repeat_center(n, repeat):
        
     """
     return np.zeros((repeat, n))
-    
-
