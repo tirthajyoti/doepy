@@ -143,12 +143,12 @@ files, that could look like,
 ::
 	
 	build.space_filling_lhs(
-{'Pressure':[40,55,70],
-'Temperature':[290, 320, 350],
-'Flow rate':[0.2,0.4], 
-'Time':[5,11]},
-num_samples = 12
-)
+	{'Pressure':[40,55,70],
+	'Temperature':[290, 320, 350],
+	'Flow rate':[0.2,0.4], 
+	'Time':[5,11]},
+	num_samples = 12
+	)
 
 ======== =========== ======== =====
 Pressure Temperature FlowRate Time
