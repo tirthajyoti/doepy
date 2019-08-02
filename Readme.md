@@ -235,11 +235,8 @@ Unfortunately, majority of the state-of-the-art DOE generators are part of comme
 The code was written in Python 3.7. It uses following external packages that needs to be installed on your system to use it,
 
 * **`pydoe`**: A package designed to help the scientist, engineer, statistician, etc., to construct appropriate experimental designs. [Check the docs here](https://pythonhosted.org/pyDOE/).
-
 * **`diversipy`**: A collection of algorithms for sampling in hypercubes, selecting diverse subsets, and measuring diversity. [Check the docs here](https://www.simonwessing.de/diversipy/doc/).
-
 * **`numpy`**
-
 * **`pandas`**
 
 
