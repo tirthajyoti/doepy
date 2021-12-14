@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 # ====================
 # Essential imports
 # ====================
@@ -203,7 +204,7 @@ def build_frac_fact_res(factor_level_ranges, res=None):
             factor_level_ranges[key][1] = factor_level_ranges[key][-1]
             factor_level_ranges[key] = factor_level_ranges[key][:2]
             print(
-                f"{key} had more than two levels. Assigning the end point to the high level."
+                "{:s} had more than two levels. Assigning the end point to the high level.".format(key)
             )
 
     for key in factor_level_ranges:
@@ -252,7 +253,7 @@ def build_plackett_burman(factor_level_ranges):
             factor_level_ranges[key][1] = factor_level_ranges[key][-1]
             factor_level_ranges[key] = factor_level_ranges[key][:2]
             print(
-                f"{key} had more than two levels. Assigning the end point to the high level."
+                "{:s} had more than two levels. Assigning the end point to the high level.".format(key)
             )
 
     factor_count = len(factor_level_ranges)
@@ -300,7 +301,7 @@ def build_sukharev(factor_level_ranges, num_samples=None):
             factor_level_ranges[key][1] = factor_level_ranges[key][-1]
             factor_level_ranges[key] = factor_level_ranges[key][:2]
             print(
-                f"{key} had more than two levels. Assigning the end point to the high level."
+                "{:s} had more than two levels. Assigning the end point to the high level.".format(key)
             )
 
     factor_count = len(factor_level_ranges)
@@ -349,7 +350,7 @@ def build_box_behnken(factor_level_ranges, center=1):
             )
             factor_level_ranges[key].sort()
             print(
-                f"{key} had only two end points. Creating a mid-point by averaging them"
+                "{:s} had only two end points. Creating a mid-point by averaging them".format(key)
             )
 
     factor_count = len(factor_level_ranges)
@@ -390,7 +391,7 @@ def build_central_composite(factor_level_ranges, center=(2, 2), alpha="o", face=
             factor_level_ranges[key][1] = factor_level_ranges[key][-1]
             factor_level_ranges[key] = factor_level_ranges[key][:2]
             print(
-                f"{key} had more than two levels. Assigning the end point to the high level."
+                "{:s} had more than two levels. Assigning the end point to the high level.".format(key)
             )
 
     # Creates the mid-points by averaging the low and high levels
@@ -437,7 +438,7 @@ def build_lhs(factor_level_ranges, num_samples=None, prob_distribution=None):
             factor_level_ranges[key][1] = factor_level_ranges[key][-1]
             factor_level_ranges[key] = factor_level_ranges[key][:2]
             print(
-                f"{key} had more than two levels. Assigning the end point to the high level."
+                "{:s} had more than two levels. Assigning the end point to the high level.".format(key)
             )
 
     factor_count = len(factor_level_ranges)
@@ -475,7 +476,7 @@ def build_space_filling_lhs(factor_level_ranges, num_samples=None):
             factor_level_ranges[key][1] = factor_level_ranges[key][-1]
             factor_level_ranges[key] = factor_level_ranges[key][:2]
             print(
-                f"{key} had more than two levels. Assigning the end point to the high level."
+                "{:s} had more than two levels. Assigning the end point to the high level.".format(key)
             )
 
     factor_count = len(factor_level_ranges)
@@ -515,7 +516,7 @@ def build_random_k_means(factor_level_ranges, num_samples=None):
             factor_level_ranges[key][1] = factor_level_ranges[key][-1]
             factor_level_ranges[key] = factor_level_ranges[key][:2]
             print(
-                f"{key} had more than two levels. Assigning the end point to the high level."
+                "{:s} had more than two levels. Assigning the end point to the high level.".format(key)
             )
 
     factor_count = len(factor_level_ranges)
@@ -560,7 +561,7 @@ def build_maximin(factor_level_ranges, num_samples=None):
             factor_level_ranges[key][1] = factor_level_ranges[key][-1]
             factor_level_ranges[key] = factor_level_ranges[key][:2]
             print(
-                f"{key} had more than two levels. Assigning the end point to the high level."
+                "{:s} had more than two levels. Assigning the end point to the high level.".format(key)
             )
 
     factor_count = len(factor_level_ranges)
@@ -602,7 +603,7 @@ def build_halton(factor_level_ranges, num_samples=None):
             factor_level_ranges[key][1] = factor_level_ranges[key][-1]
             factor_level_ranges[key] = factor_level_ranges[key][:2]
             print(
-                f"{key} had more than two levels. Assigning the end point to the high level."
+                "{:s} had more than two levels. Assigning the end point to the high level.".format(key)
             )
 
     factor_count = len(factor_level_ranges)
@@ -642,7 +643,7 @@ def build_uniform_random(factor_level_ranges, num_samples=None):
             factor_level_ranges[key][1] = factor_level_ranges[key][-1]
             factor_level_ranges[key] = factor_level_ranges[key][:2]
             print(
-                f"{key} had more than two levels. Assigning the end point to the high level."
+                "{:s} had more than two levels. Assigning the end point to the high level.".format(key)
             )
 
     factor_count = len(factor_level_ranges)
