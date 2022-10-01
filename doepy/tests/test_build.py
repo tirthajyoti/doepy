@@ -10,6 +10,18 @@ def test_full_fact():
     for factor, values in factors.items():
         assert set(df[factor]) == set(values)
 
+    # factorlevels can also be strings
+    factors = {
+        'lr': [5e-4, 2e-4, 1e-3],
+        'iterations': [20000, 40000],
+        'n_pairs': [20, 40, 80],
+        'level': ["LOW", "HIGH"]
+    }
+    df = full_fact(factors)
+    assert len(df) == 3 * 2 * 3 * 2
+    for factor, values in factors.items():
+        assert set(df[factor]) == set(values)
+
 
 def test_frac_fact_res():
     factors = {'A': [1, 5], 'B': [0.3, 0.7], 'C': [10, 15], 'D': [3, 7], 'E': [-2, -1]}
