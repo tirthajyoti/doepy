@@ -1,0 +1,8 @@
+pyDOE
+numpy
+pandas
+diversipy
+
+pytest
+pytest-watch 
+pytest-testmon 
