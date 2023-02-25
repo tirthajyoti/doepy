@@ -15,7 +15,7 @@ setup(
     download_url = 'https://github.com/tirthajyoti/doepy/archive/0.0.1.tar.gz',
     license='MIT License',
     long_description_content_type='text/markdown',
-    long_description=read('README.md'),
+    long_description=read('Readme.md'),
     packages=['doepy'],
     install_requires=['pyDOE', 'numpy','pandas','diversipy'],
     keywords=[
