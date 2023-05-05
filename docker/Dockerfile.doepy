@@ -1,0 +1,7 @@
+FROM python:3.9-slim
+RUN mkdir /src
+WORKDIR /src
+COPY ./requirements.txt /requirements.txt
+RUN pip3 install --requirement /requirements.txt
+RUN pip3 install --upgrade pip
+
