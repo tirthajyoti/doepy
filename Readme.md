@@ -59,8 +59,8 @@ Then, try a simple example by building a **full factorial design**. We will use 
 
 ```
 build.full_fact(
-{'Pressure':[40,55,70],
-'Temperature':[290, 320, 350],
+{'Pressure':[40,70],
+'Temperature':[290,350],
 'Flow rate':[0.2,0.4], 
 'Time':[5,8]}
 )
