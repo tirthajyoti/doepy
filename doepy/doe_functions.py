@@ -25,7 +25,7 @@ def construct_df(x, r):
     df = pd.DataFrame(data=x, dtype="float32")
     for i in df.index:
         for j in range(len(list(df.iloc[i]))):
-            df.iloc[i][j] = r[j][int(df.iloc[i][j])]
+            df.iat[i, j] = r[j][int(df.iat[i, j])]
     return df
 
 
