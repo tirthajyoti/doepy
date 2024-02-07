@@ -79,7 +79,7 @@ Let's say you have a design problem with the following table for the parameters 
 Pressure | Temperature | FlowRate | Time
 ------------ | ------------- | -------------|-----------------
 40 | 290 | 0.2 | 5
-50 | 320 | 0.3 | 8
+55 | 320 | 0.4 | 8
 70 | 350 | - | -
 
 First, import `build` module from the package,
@@ -104,15 +104,15 @@ If you build a full-factorial DOE out of this, you should get a table with 3x3x2
 Pressure | Temperature | FlowRate | Time
 ------------ | ------------- | -------------|-----------------
 40 | 290 | 0.2 | 5
-50 | 290 | 0.2 | 5
+55 | 290 | 0.2 | 5
 70 | 290 | 0.2 | 5
 40 | 320 | 0.2 | 5
 ... | ... | ... | ...
 ...| ... | ... | ...
-40 | 290 | 0.3 | 8
-50 | 290 | 0.3 | 8
-70 | 290 | 0.3 | 8
-40 | 320 | 0.3 | 8
+40 | 290 | 0.4 | 8
+55 | 290 | 0.4 | 8
+70 | 290 | 0.4 | 8
+40 | 320 | 0.4 | 8
 ... | ... | ... | ...
 ...| ... | ... | ...
 
